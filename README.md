@@ -30,10 +30,6 @@ Copy any `SKILL.md` file from `skills/` into `~/.claude/skills/<skill-name>/SKIL
 
 ## Available skills
 
-> Skills are being authored — see the [main repo's AI corpus issues](https://github.com/sindev08/react-principles/issues?q=is%3Aissue+label%3Aai-corpus) for tracked work.
-
-Planned:
-
 | Skill | Description |
 |---|---|
 | `/reactprinciples` | Umbrella skill — routes to the right sub-skill based on intent |
@@ -59,6 +55,15 @@ skills/
 
 `SKILL.md` has YAML frontmatter (name, description, allowed-tools) and a markdown body with instructions for the AI.
 
+## Live content — skills never go stale
+
+Skills do **not** embed copies of the cookbook. Instead, every skill starts with a required step that loads the current recipe from the source of truth:
+
+1. Via the [React Principles MCP server](https://reactprinciples.dev/ai) (`get_recipe` tool), if connected
+2. Otherwise via per-recipe markdown: `https://reactprinciples.dev/cookbook/<slug>/llms.txt`
+
+This means recipe updates on [reactprinciples.dev](https://reactprinciples.dev) reach your installed skills **automatically** — no re-install needed. Each skill keeps a short offline fallback summary, clearly labeled, for when the network is unavailable.
+
 ## Versioning
 
 This repo follows [Semantic Versioning](https://semver.org/) via [release-please](https://github.com/googleapis/release-please).
@@ -71,11 +76,13 @@ See [CHANGELOG.md](./CHANGELOG.md) for history.
 
 ## Updating installed skills
 
-There is **no auto-update** on the skills.sh side. To get the latest version of skills you've installed, re-run:
+Recipe content updates automatically (see **Live content** above). Re-installing is only needed when the *workflow instructions* in the skills themselves change:
 
 ```bash
 npx skills add sindev08/react-principles-skills
 ```
+
+> **Installed before the live-content change?** Older versions embedded recipe snapshots that go stale. Re-run the install command once to switch to the live-fetch versions — after that, content updates reach you automatically.
 
 ## Contributing
 

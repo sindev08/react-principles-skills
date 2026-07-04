@@ -1,12 +1,21 @@
 ---
 name: reactprinciples-store
 description: Scaffold a Zustand store following React Principles client-state recipe. Invoke when the user says "create a Zustand store", "scaffold a state store", or asks about React Principles state management. Generates a typed store with colocated actions, selector pattern, useShallow guidance, reset action, and 'use client' directive. Includes a colocated test file. Use for UI/client state only — server state belongs in React Query.
-allowed-tools: Read, Write, Glob
+allowed-tools: Read, Write, Glob, WebFetch
 ---
 
 # React Principles — Zustand Store Scaffold
 
 You scaffold a Zustand store following the [Client State with Zustand](https://reactprinciples.dev/cookbook/client-state) recipe.
+
+## Step 0 — Load the live recipe (required)
+
+Do this before anything else. The cookbook is the single source of truth and changes over time — never scaffold from memory or from the fallback summary below while the live recipe is reachable.
+
+1. If the `reactprinciples` MCP server is available, call its `get_recipe` tool with slug `client-state`.
+2. Otherwise fetch: https://reactprinciples.dev/cookbook/client-state/llms.txt
+
+The fetched recipe contains the store rules, selector guidance, and canonical pattern code — treat its rules as requirements, not suggestions. If both sources are unreachable (offline), use the fallback summary at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
 ## When to invoke
 
@@ -37,7 +46,7 @@ Ask the user for:
 
 ## What to read first
 
-Read existing stores for reference:
+Read existing stores in the user's project for reference:
 
 ```
 src/shared/stores/useAppStore.ts
@@ -46,96 +55,9 @@ src/shared/stores/useFilterStore.ts
 
 Match the conventions exactly.
 
-## Template
+## How to scaffold
 
-```ts
-"use client";
-
-import { create } from "zustand";
-
-// ─── Types ────────────────────────────────────────────────────────────────────
-
-interface <Name>State {
-  // state fields
-  count: number;
-  // actions
-  increment: () => void;
-  reset: () => void;
-}
-
-// ─── Initial State ────────────────────────────────────────────────────────────
-
-const initialState = {
-  count: 0,
-};
-
-// ─── Store ────────────────────────────────────────────────────────────────────
-
-export const use<Name>Store = create<<Name>State>((set) => ({
-  ...initialState,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-  reset: () => set(initialState),
-}));
-
-// ─── Computed selectors (optional) ────────────────────────────────────────────
-
-export const useIs<Computed> = () =>
-  use<Name>Store((s) => /* derive from state */);
-```
-
-### Critical rules in the template
-
-1. **`'use client'` at top of file** — required because Zustand uses React internals
-2. **Initial state as a `const`** — enables clean `reset: () => set(initialState)`
-3. **Actions inside the store** — never as separate functions outside
-4. **Type the state interface explicitly** — don't rely on inference
-
-## Test file
-
-```ts
-// use<Name>Store.test.ts
-import { describe, it, expect, beforeEach } from "vitest";
-import { use<Name>Store } from "./use<Name>Store";
-
-describe("use<Name>Store", () => {
-  beforeEach(() => {
-    use<Name>Store.getState().reset();
-  });
-
-  it("has the correct initial state", () => {
-    expect(use<Name>Store.getState().count).toBe(0);
-  });
-
-  it("increments correctly", () => {
-    use<Name>Store.getState().increment();
-    expect(use<Name>Store.getState().count).toBe(1);
-  });
-
-  it("resets to initial state", () => {
-    use<Name>Store.getState().increment();
-    use<Name>Store.getState().reset();
-    expect(use<Name>Store.getState().count).toBe(0);
-  });
-});
-```
-
-## Consumer code reminder
-
-When teaching the user how to consume the store, emphasize the selector pattern:
-
-```tsx
-// GOOD — single selector
-const count = use<Name>Store((s) => s.count);
-
-// GOOD — multiple values with useShallow
-import { useShallow } from "zustand/shallow";
-const { count, increment } = use<Name>Store(
-  useShallow((s) => ({ count: s.count, increment: s.increment }))
-);
-
-// BAD — re-renders on any state change
-const { count, increment } = use<Name>Store();
-```
+Derive the store and its colocated test from the **pattern code in the recipe you fetched in Step 0**, shaped to match the existing stores you read. When you hand the result over, show the user the consumption pattern from the recipe (selectors, `useShallow` for multi-value reads) so they don't subscribe to the full store.
 
 ## After generating
 
@@ -151,6 +73,16 @@ Tell the user:
 - Don't put `'use client'` on the barrel `index.ts` — only on the store file
 - Don't make actions accept the full state — they should accept only what they need
 - Don't store derived/computed values in state — compute them via selectors
+
+## Fallback summary (only if Step 0 fails)
+
+May be outdated — the live recipe always wins.
+
+- `'use client'` at the top of the store file (Zustand uses React internals)
+- Initial state as a `const` so `reset: () => set(initialState)` stays clean
+- Actions live inside the store definition, typed via an explicit state interface
+- Consume via selectors (`useStore(s => s.x)`); `useShallow` for multiple values — never destructure the full store
+- One store per domain; colocate a `*.test.ts` that exercises actions via `getState()`
 
 ## Reference
 

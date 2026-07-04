@@ -1,7 +1,7 @@
 ---
 name: reactprinciples
 description: Master entry point for React Principles. Invoke when the user mentions "React Principles", asks for help with the cookbook patterns without specifying a sub-skill, or wants an overview of available React Principles capabilities. Routes intent to the right sub-skill (review, folder-structure, component, hook, store, query, form, recipe, audit-recipe) and either delegates to that sub-skill or executes the equivalent task. When intent is ambiguous, lists options and asks the user to clarify.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 ---
 
 # React Principles — Master Skill
@@ -76,6 +76,8 @@ If the user's message could match 2+ sub-skills equally, or doesn't match any cl
 ## Abbreviated playbooks (fallback if sub-skill is unavailable)
 
 These are quick references. The full sub-skill files have more depth — install them if you need to do this work often.
+
+**Before using a playbook**, load the current rules from the source of truth: call the `reactprinciples` MCP server's `get_recipe`/`list_recipes` tools if available, or fetch https://reactprinciples.dev/llms.txt. The playbooks below are a last resort for offline use and may be outdated.
 
 ### Review (fallback)
 

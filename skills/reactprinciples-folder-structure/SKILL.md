@@ -1,12 +1,21 @@
 ---
 name: reactprinciples-folder-structure
 description: Scaffold a feature-sliced folder structure for a new feature in a React project following the React Principles cookbook. Invoke when the user says "create a new feature", "scaffold feature folder", or asks about React Principles folder structure. Creates the directory layout (components, hooks, stores, data) with barrel index.ts files at appropriate levels. Does not generate component bodies — only the structure.
-allowed-tools: Read, Write, Bash, Glob
+allowed-tools: Read, Write, Bash, Glob, WebFetch
 ---
 
 # React Principles — Feature Folder Structure
 
 You scaffold a new feature folder following the [feature-sliced architecture](https://reactprinciples.dev/cookbook/folder-structure) pattern documented in the React Principles cookbook.
+
+## Step 0 — Load the live recipe (required)
+
+Do this before anything else. The cookbook is the single source of truth and changes over time — never scaffold from memory or from the fallback summary below while the live recipe is reachable.
+
+1. If the `reactprinciples` MCP server is available, call its `get_recipe` tool with slug `folder-structure`.
+2. Otherwise fetch: https://reactprinciples.dev/cookbook/folder-structure/llms.txt
+
+The fetched recipe contains the directory layout, barrel export rules, and rationale — treat its rules as requirements, not suggestions. If both sources are unreachable (offline), use the fallback summary at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
 ## When to invoke
 
@@ -29,7 +38,7 @@ If the user gives only the name, default to creating `components/` and `hooks/`.
 
 ## What to read first
 
-Before generating, look at an existing feature for reference:
+Before generating, look at an existing feature in the user's project for reference:
 
 ```
 src/features/examples/    # or any existing feature
@@ -37,30 +46,9 @@ src/features/examples/    # or any existing feature
 
 Match the conventions you find there — barrel export style, folder casing, file naming.
 
-## Structure to generate
+## How to scaffold
 
-For a feature named `<feature>`, create:
-
-```
-src/features/<feature>/
-├── index.ts                          # barrel — re-exports public API
-├── components/
-│   └── index.ts                      # barrel for components
-├── hooks/                            # optional
-│   └── index.ts
-├── stores/                           # optional
-│   └── index.ts
-└── data/                             # optional
-    └── index.ts
-```
-
-Each `index.ts` starts empty (or with a comment placeholder), to be filled as the feature grows.
-
-## Barrel export rules
-
-- `index.ts` at feature root re-exports the **public API only** — components and hooks that other features may consume
-- Internal types, utilities, and stores are NOT re-exported from the root barrel
-- Stores require `'use client'` — but the directive goes on the store file itself, NEVER on `index.ts` barrels
+Create the directory layout exactly as described in the recipe you fetched in Step 0, limited to the parts the user asked for. Follow the recipe's barrel export rules for where `index.ts` files go and what they may re-export.
 
 ## After generating
 
@@ -74,6 +62,15 @@ Tell the user:
 - Don't generate actual components or hooks — that's a separate skill (`reactprinciples-component`, `reactprinciples-hook`)
 - Don't create a `utils/` folder at the feature level — cross-cutting utilities belong in `@/shared/utils/`
 - Don't put barrel exports inside subfolders if there's only one file in them
+
+## Fallback summary (only if Step 0 fails)
+
+May be outdated — the live recipe always wins.
+
+- Features live in `src/features/<feature>/` with optional `components/`, `hooks/`, `stores/`, `data/` subfolders, each with a barrel `index.ts`
+- The root barrel re-exports the public API only — internal types, utilities, and stores stay private
+- `'use client'` goes on the store/component file itself, never on `index.ts` barrels
+- Shared code belongs in `src/shared/`, UI primitives in `src/ui/`
 
 ## Reference
 
