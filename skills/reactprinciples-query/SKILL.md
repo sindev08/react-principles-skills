@@ -1,12 +1,21 @@
 ---
 name: reactprinciples-query
 description: Scaffold a TanStack Query (React Query) hook following React Principles server-state recipe. Invoke when the user says "create a React Query hook", "fetch data with useQuery", or asks for server state management. Generates the query hook with staleTime, placeholderData, enabled flag where appropriate, plus pairs with a service method and the queryKeys factory. Use for server data only — client state belongs in Zustand.
-allowed-tools: Read, Write, Glob
+allowed-tools: Read, Write, Glob, WebFetch
 ---
 
 # React Principles — React Query Hook Scaffold
 
 You scaffold a TanStack Query (React Query) hook following the [Server State with React Query](https://reactprinciples.dev/cookbook/server-state) recipe.
+
+## Step 0 — Load the live recipe (required)
+
+Do this before anything else. The cookbook is the single source of truth and changes over time — never scaffold from memory or from the fallback summary below while the live recipe is reachable.
+
+1. If the `reactprinciples` MCP server is available, call its `get_recipe` tool with slug `server-state`. When the task touches the service/API-client layer, also fetch `api-integration`.
+2. Otherwise fetch: https://reactprinciples.dev/cookbook/server-state/llms.txt (and https://reactprinciples.dev/cookbook/api-integration/llms.txt when relevant)
+
+The fetched recipe contains the query rules (staleTime, placeholderData, enabled, invalidation) and canonical pattern code for every query type — treat its rules as requirements, not suggestions. If both sources are unreachable (offline), use the fallback summary at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
 ## When to invoke
 
@@ -26,18 +35,14 @@ You scaffold a TanStack Query (React Query) hook following the [Server State wit
 Ask the user for:
 
 1. **Hook name** — camelCase starting with `use` (e.g., `useUsers`, `useUser`, `useSearchUsers`)
-2. **Query type**:
-   - **List** — paginated/filtered list (typically uses `staleTime` + `placeholderData`)
-   - **Detail** — single resource by id (typically uses `enabled: !!id`)
-   - **Search** — debounced search (typically uses `enabled: query.length > 0`)
-   - **Mutation** — POST/PUT/PATCH/DELETE (uses `useMutation` + cache invalidation)
+2. **Query type** — list, detail, debounced search, or mutation
 3. **Service method** — which method on which service (e.g., `usersService.getAll`, `usersService.getById`)
 4. **Query key** — which key from `queryKeys` factory (e.g., `queryKeys.users.list(params)`)
 5. **Location** — `src/features/<feature>/hooks/`
 
 ## What to read first
 
-Read existing hooks for reference:
+Read existing hooks in the user's project for reference:
 
 ```
 src/features/examples/hooks/useUsers.ts       # list with staleTime + placeholderData
@@ -50,89 +55,9 @@ src/lib/services/users.ts                      # service layer
 
 Confirm `queryKeys` has the needed entry — if not, instruct the user to add it.
 
-## Templates
+## How to scaffold
 
-### List query
-
-```ts
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/lib/query-keys";
-import { <service>, type Get<Resource>Params } from "@/lib/services/<service-file>";
-
-export function use<Resources>(params: Get<Resource>Params = {}) {
-  return useQuery({
-    queryKey: queryKeys.<resource>.list(params),
-    queryFn: () => <service>.getAll(params),
-    staleTime: 1000 * 60 * 5,        // 5 minutes
-    placeholderData: (prev) => prev, // smooth pagination
-  });
-}
-```
-
-### Detail query
-
-```ts
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/lib/query-keys";
-import { <service> } from "@/lib/services/<service-file>";
-
-export function use<Resource>(id: string) {
-  return useQuery({
-    queryKey: queryKeys.<resource>.detail(id),
-    queryFn: () => <service>.getById(id),
-    enabled: !!id,
-    staleTime: 1000 * 60 * 10,       // 10 minutes for stable details
-  });
-}
-```
-
-### Debounced search
-
-```ts
-import { useQuery } from "@tanstack/react-query";
-import { useDebounce } from "@/shared/hooks";
-import { queryKeys } from "@/lib/query-keys";
-import { <service> } from "@/lib/services/<service-file>";
-
-export function useSearch<Resources>(query: string) {
-  const debouncedQuery = useDebounce(query, 300);
-
-  return useQuery({
-    queryKey: queryKeys.<resource>.search(debouncedQuery),
-    queryFn: () => <service>.search({ q: debouncedQuery }),
-    enabled: debouncedQuery.length > 0,
-    staleTime: 1000 * 60 * 5,
-  });
-}
-```
-
-### Mutation
-
-```ts
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "@/lib/query-keys";
-import { <service> } from "@/lib/services/<service-file>";
-import type { Create<Resource>Input } from "@/shared/types/<resource>";
-
-export function useCreate<Resource>() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: (data: Create<Resource>Input) => <service>.create(data),
-    onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: queryKeys.<resource>.all });
-    },
-  });
-}
-```
-
-## Rules embedded in the templates
-
-1. **Always set `staleTime` explicitly** — defaults are too aggressive for most apps. 5 min for lists, 10 min for details is a sensible baseline.
-2. **`placeholderData: (prev) => prev`** for paginated lists — prevents layout shift.
-3. **`enabled` flag** for dependent queries — never run a query before its input exists.
-4. **Mutations invalidate the relevant list cache** via `queryClient.invalidateQueries`.
-5. **Void the invalidate** — `void queryClient.invalidateQueries(...)` because we don't await it.
+Derive the hook from the **pattern code for the matching query type in the recipe you fetched in Step 0**, wired to the user's service method and query key, and shaped to match the existing hooks you read.
 
 ## After generating
 
@@ -149,6 +74,15 @@ Tell the user:
 - Don't omit `staleTime` — explicit is better than relying on defaults
 - Don't put the query hook in `src/components/` — hooks go in `src/features/<x>/hooks/`
 - Don't mix server state (React Query) and client state (Zustand) in the same hook
+
+## Fallback summary (only if Step 0 fails)
+
+May be outdated — the live recipe always wins.
+
+- Always set `staleTime` explicitly (minutes, not zero); `placeholderData: (prev) => prev` for paginated lists
+- `enabled` flag for dependent queries (`enabled: !!id`, `enabled: query.length > 0` for search)
+- Mutations invalidate the relevant cache: `void queryClient.invalidateQueries({ queryKey: ... })`
+- The chain is service → hook → component; hooks call typed service methods, never `fetch` directly
 
 ## Reference
 

@@ -1,12 +1,21 @@
 ---
 name: reactprinciples-hook
 description: Scaffold a custom React hook following React Principles custom-hooks recipe. Invoke when the user says "create a custom hook", "scaffold a hook", or asks for a hook to encapsulate logic. Generates the hook file with proper naming (use prefix), TypeScript types, a stable return shape, and a colocated test file. Places the hook in src/shared/hooks/ for cross-feature use or src/features/<x>/hooks/ for feature-specific.
-allowed-tools: Read, Write, Glob
+allowed-tools: Read, Write, Glob, WebFetch
 ---
 
 # React Principles — Custom Hook Scaffold
 
 You scaffold a custom React hook following the [Custom Hooks](https://reactprinciples.dev/cookbook/custom-hooks) recipe.
+
+## Step 0 — Load the live recipe (required)
+
+Do this before anything else. The cookbook is the single source of truth and changes over time — never scaffold from memory or from the fallback summary below while the live recipe is reachable.
+
+1. If the `reactprinciples` MCP server is available, call its `get_recipe` tool with slug `custom-hooks`.
+2. Otherwise fetch: https://reactprinciples.dev/cookbook/custom-hooks/llms.txt
+
+The fetched recipe contains the naming, return-shape, and testing rules plus canonical pattern code — treat its rules as requirements, not suggestions. If both sources are unreachable (offline), use the fallback summary at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
 ## When to invoke
 
@@ -28,7 +37,7 @@ Ask the user for:
 
 ## What to read first
 
-Read an existing hook for reference:
+Read an existing hook and its test in the user's project for reference:
 
 ```
 src/shared/hooks/useDebounce.ts
@@ -37,56 +46,14 @@ src/shared/hooks/useDebounce.test.ts
 
 Match the conventions you find.
 
-## Template
+## How to scaffold
 
-For a hook `use<Name>` with arguments `(arg: ArgType)`:
+Derive the hook and its colocated test from the **pattern code in the recipe you fetched in Step 0**, shaped to match the existing hook you read. The test should verify the simplest happy path — don't generate exhaustive tests; leave that to the user.
 
-```ts
-import { useState, useEffect } from "react";
-
-/**
- * <One-line description of what the hook does and when to use it.>
- *
- * @example
- *   const result = use<Name>(input);
- */
-export function use<Name>(arg: ArgType): ReturnType {
-  // hook body
-}
-```
-
-Adjust:
-- Replace `useState, useEffect` with whatever React APIs are needed
-- For React Query hooks → use `reactprinciples-query` skill instead
-- For Zustand store hooks → use `reactprinciples-store` skill instead
-- For form hooks → use `reactprinciples-form` skill instead
-
-## Test file
-
-Always generate a colocated test:
-
-```ts
-// use<Name>.test.ts
-import { describe, it, expect } from "vitest";
-import { renderHook } from "@testing-library/react";
-import { use<Name> } from "./use<Name>";
-
-describe("use<Name>", () => {
-  it("returns the expected value for the basic case", () => {
-    const { result } = renderHook(() => use<Name>(/* args */));
-    expect(result.current).toBe(/* expected */);
-  });
-});
-```
-
-The test should at least verify the simplest happy path. Don't generate exhaustive tests — leave that to the user.
-
-## Return shape rules
-
-- **Single value** — `return result;` (e.g., debounced value)
-- **Tuple** — `return [value, setter] as const;` (only when there's a clear ordering, like state hooks)
-- **Object** — `return { data, isLoading, error };` (when there are 2+ named return values)
-- **Never** return more than 4 values — split the hook if it grows that big
+Route away when a more specific skill applies:
+- React Query hooks → `reactprinciples-query`
+- Zustand store hooks → `reactprinciples-store`
+- Form hooks → `reactprinciples-form`
 
 ## After generating
 
@@ -101,6 +68,15 @@ Tell the user:
 - Don't generate hooks that wrap a single React API one-to-one without adding value (e.g., a hook that just calls `useState`)
 - Don't put hooks in `src/features/<x>/components/` — hooks belong in a `hooks/` folder
 - Don't import the hook from outside its feature using relative paths — always use `@/` alias
+
+## Fallback summary (only if Step 0 fails)
+
+May be outdated — the live recipe always wins.
+
+- Name starts with `use`, camelCase; only called from components or other hooks
+- Stable return shape: single value, `[value, setter] as const` tuple, or a named object for 2+ values — never more than 4
+- Colocate a `*.test.ts` using `renderHook` from Testing Library
+- Document with a one-line JSDoc + `@example`
 
 ## Reference
 
