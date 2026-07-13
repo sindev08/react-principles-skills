@@ -6,14 +6,14 @@ allowed-tools: Read, Write, Glob, WebFetch
 
 # React Principles — React Query Hook Scaffold
 
-You scaffold a TanStack Query (React Query) hook following the [Server State with React Query](https://reactprinciples.dev/cookbook/server-state) recipe.
+You scaffold a TanStack Query (React Query) hook following the [Server State with React Query](https://www.reactprinciples.dev/cookbook/server-state) recipe.
 
 ## Step 0 — Load the live recipe (required)
 
 Do this before anything else. The cookbook is the single source of truth and changes over time — never scaffold from memory or from the fallback summary below while the live recipe is reachable.
 
 1. If the `reactprinciples` MCP server is available, call its `get_recipe` tool with slug `server-state`. When the task touches the service/API-client layer, also fetch `api-integration`.
-2. Otherwise fetch: https://reactprinciples.dev/cookbook/server-state/llms.txt (and https://reactprinciples.dev/cookbook/api-integration/llms.txt when relevant)
+2. Otherwise fetch: https://www.reactprinciples.dev/cookbook/server-state/llms.txt (and https://www.reactprinciples.dev/cookbook/api-integration/llms.txt when relevant)
 
 The fetched recipe contains the query rules (staleTime, placeholderData, enabled, invalidation) and canonical pattern code for every query type — treat its rules as requirements, not suggestions. If both sources are unreachable (offline), use the fallback summary at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
@@ -86,4 +86,4 @@ May be outdated — the live recipe always wins.
 
 ## Reference
 
-See [Server State with React Query recipe](https://reactprinciples.dev/cookbook/server-state) and existing hooks in `src/features/examples/hooks/`.
+See [Server State with React Query recipe](https://www.reactprinciples.dev/cookbook/server-state) and existing hooks in `src/features/examples/hooks/`.

@@ -6,14 +6,14 @@ allowed-tools: Read, Write, Bash, Glob, WebFetch
 
 # React Principles — Feature Folder Structure
 
-You scaffold a new feature folder following the [feature-sliced architecture](https://reactprinciples.dev/cookbook/folder-structure) pattern documented in the React Principles cookbook.
+You scaffold a new feature folder following the [feature-sliced architecture](https://www.reactprinciples.dev/cookbook/folder-structure) pattern documented in the React Principles cookbook.
 
 ## Step 0 — Load the live recipe (required)
 
 Do this before anything else. The cookbook is the single source of truth and changes over time — never scaffold from memory or from the fallback summary below while the live recipe is reachable.
 
 1. If the `reactprinciples` MCP server is available, call its `get_recipe` tool with slug `folder-structure`.
-2. Otherwise fetch: https://reactprinciples.dev/cookbook/folder-structure/llms.txt
+2. Otherwise fetch: https://www.reactprinciples.dev/cookbook/folder-structure/llms.txt
 
 The fetched recipe contains the directory layout, barrel export rules, and rationale — treat its rules as requirements, not suggestions. If both sources are unreachable (offline), use the fallback summary at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
@@ -74,4 +74,4 @@ May be outdated — the live recipe always wins.
 
 ## Reference
 
-See [Folder Structure recipe](https://reactprinciples.dev/cookbook/folder-structure) for the full rationale.
+See [Folder Structure recipe](https://www.reactprinciples.dev/cookbook/folder-structure) for the full rationale.

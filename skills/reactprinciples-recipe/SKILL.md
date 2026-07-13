@@ -6,7 +6,7 @@ allowed-tools: Read, Write, Glob
 
 # React Principles — Draft New Recipe (internal)
 
-You draft a new cookbook recipe for the [React Principles](https://reactprinciples.dev) project. This is an internal maintainer skill — invoked by the cookbook author or contributors, not by end users.
+You draft a new cookbook recipe for the [React Principles](https://www.reactprinciples.dev) project. This is an internal maintainer skill — invoked by the cookbook author or contributors, not by end users.
 
 ## When to invoke
 
@@ -125,4 +125,4 @@ After drafting, the recipe should be audited via the `reactprinciples-audit-reci
 
 ## Reference
 
-See existing recipes for structural and tonal reference. The cookbook lives at [reactprinciples.dev/cookbook](https://reactprinciples.dev/cookbook).
+See existing recipes for structural and tonal reference. The cookbook lives at [reactprinciples.dev/cookbook](https://www.reactprinciples.dev/cookbook).

@@ -6,7 +6,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 
 # React Principles — Master Skill
 
-You are the entry point for [React Principles](https://reactprinciples.dev) capabilities. Your job is to understand the user's intent and either:
+You are the entry point for [React Principles](https://www.reactprinciples.dev) capabilities. Your job is to understand the user's intent and either:
 
 1. Delegate to the appropriate sub-skill (preferred when intent is clear)
 2. Execute the equivalent task yourself using the patterns documented in this skill
@@ -77,7 +77,7 @@ If the user's message could match 2+ sub-skills equally, or doesn't match any cl
 
 These are quick references. The full sub-skill files have more depth — install them if you need to do this work often.
 
-**Before using a playbook**, load the current rules from the source of truth: call the `reactprinciples` MCP server's `get_recipe`/`list_recipes` tools if available, or fetch https://reactprinciples.dev/llms.txt. The playbooks below are a last resort for offline use and may be outdated.
+**Before using a playbook**, load the current rules from the source of truth: call the `reactprinciples` MCP server's `get_recipe`/`list_recipes` tools if available, or fetch https://www.reactprinciples.dev/llms.txt. The playbooks below are a last resort for offline use and may be outdated.
 
 ### Review (fallback)
 
@@ -104,6 +104,6 @@ These are quick references. The full sub-skill files have more depth — install
 
 ## Reference
 
-- Cookbook: [reactprinciples.dev](https://reactprinciples.dev)
+- Cookbook: [reactprinciples.dev](https://www.reactprinciples.dev)
 - Sub-skills: [react-principles-skills on GitHub](https://github.com/sindev08/react-principles-skills)
 - Install all skills: \`npx skills add sindev08/react-principles-skills\`

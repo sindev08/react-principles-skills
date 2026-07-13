@@ -6,14 +6,14 @@ allowed-tools: Read, Write, Glob, WebFetch
 
 # React Principles — Form Scaffold
 
-You scaffold a React Hook Form + Zod form following the [Form Validation with Zod](https://reactprinciples.dev/cookbook/form-validation) recipe.
+You scaffold a React Hook Form + Zod form following the [Form Validation with Zod](https://www.reactprinciples.dev/cookbook/form-validation) recipe.
 
 ## Step 0 — Load the live recipe (required)
 
 Do this before anything else. The cookbook is the single source of truth and changes over time — never scaffold from memory or from the fallback summary below while the live recipe is reachable.
 
 1. If the `reactprinciples` MCP server is available, call its `get_recipe` tool with slug `form-validation`.
-2. Otherwise fetch: https://reactprinciples.dev/cookbook/form-validation/llms.txt
+2. Otherwise fetch: https://www.reactprinciples.dev/cookbook/form-validation/llms.txt
 
 The fetched recipe contains the principle, rules, canonical pattern code, and implementation examples — treat its rules as requirements, not suggestions. If both sources are unreachable (offline), use the fallback summary at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
@@ -82,4 +82,4 @@ May be outdated — the live recipe always wins.
 
 ## Reference
 
-See [Form Validation with Zod recipe](https://reactprinciples.dev/cookbook/form-validation) and existing forms in `src/features/examples/components/`.
+See [Form Validation with Zod recipe](https://www.reactprinciples.dev/cookbook/form-validation) and existing forms in `src/features/examples/components/`.

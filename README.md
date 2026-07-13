@@ -4,7 +4,7 @@
 
 **Claude/Cursor/AI skills for React Principles cookbook patterns.**
 
-Follows the open [Agent Skills specification](https://agentskills.io/). Distributed via [skills.sh](https://skills.sh) and discoverable from [reactprinciples.dev](https://reactprinciples.dev).
+Follows the open [Agent Skills specification](https://agentskills.io/). Distributed via [skills.sh](https://skills.sh) and discoverable from [reactprinciples.dev](https://www.reactprinciples.dev).
 
 </div>
 
@@ -12,7 +12,7 @@ Follows the open [Agent Skills specification](https://agentskills.io/). Distribu
 
 ## What is this?
 
-This repo contains a collection of [Agent Skills](https://agentskills.io/) — invocable commands that teach AI assistants (Claude Code, Cursor, Copilot, etc.) to scaffold code and review code following the principles documented in the [React Principles cookbook](https://reactprinciples.dev).
+This repo contains a collection of [Agent Skills](https://agentskills.io/) — invocable commands that teach AI assistants (Claude Code, Cursor, Copilot, etc.) to scaffold code and review code following the principles documented in the [React Principles cookbook](https://www.reactprinciples.dev).
 
 Skills are **portable**: they work across any AI tool that supports the Agent Skills spec.
 
@@ -59,10 +59,10 @@ skills/
 
 Skills do **not** embed copies of the cookbook. Instead, every skill starts with a required step that loads the current recipe from the source of truth:
 
-1. Via the [React Principles MCP server](https://reactprinciples.dev/ai) (`get_recipe` tool), if connected
-2. Otherwise via per-recipe markdown: `https://reactprinciples.dev/cookbook/<slug>/llms.txt`
+1. Via the [React Principles MCP server](https://www.reactprinciples.dev/ai) (`get_recipe` tool), if connected
+2. Otherwise via per-recipe markdown: `https://www.reactprinciples.dev/cookbook/<slug>/llms.txt`
 
-This means recipe updates on [reactprinciples.dev](https://reactprinciples.dev) reach your installed skills **automatically** — no re-install needed. Each skill keeps a short offline fallback summary, clearly labeled, for when the network is unavailable.
+This means recipe updates on [reactprinciples.dev](https://www.reactprinciples.dev) reach your installed skills **automatically** — no re-install needed. Each skill keeps a short offline fallback summary, clearly labeled, for when the network is unavailable.
 
 ## Versioning
 

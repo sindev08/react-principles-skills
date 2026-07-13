@@ -6,14 +6,14 @@ allowed-tools: Read, Write, Glob, WebFetch
 
 # React Principles — Component Scaffold
 
-You scaffold a UI component following the [Component Anatomy](https://reactprinciples.dev/cookbook/component-anatomy) recipe. The result is a single, self-contained component file matching the conventions in `src/ui/`.
+You scaffold a UI component following the [Component Anatomy](https://www.reactprinciples.dev/cookbook/component-anatomy) recipe. The result is a single, self-contained component file matching the conventions in `src/ui/`.
 
 ## Step 0 — Load the live recipe (required)
 
 Do this before anything else. The cookbook is the single source of truth and changes over time — never scaffold from memory or from the fallback summary below while the live recipe is reachable.
 
 1. If the `reactprinciples` MCP server is available, call its `get_recipe` tool with slug `component-anatomy`. When the task involves composition decisions (children, slots, render props), also fetch `component-composition`.
-2. Otherwise fetch: https://reactprinciples.dev/cookbook/component-anatomy/llms.txt (and https://reactprinciples.dev/cookbook/component-composition/llms.txt when relevant)
+2. Otherwise fetch: https://www.reactprinciples.dev/cookbook/component-anatomy/llms.txt (and https://www.reactprinciples.dev/cookbook/component-composition/llms.txt when relevant)
 
 The fetched recipe contains the anatomy rules and canonical pattern code — treat its rules as requirements, not suggestions. If both sources are unreachable (offline), use the fallback summary at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
@@ -77,4 +77,4 @@ May be outdated — the live recipe always wins.
 
 ## Reference
 
-See [Component Anatomy recipe](https://reactprinciples.dev/cookbook/component-anatomy) and existing components in `src/ui/`.
+See [Component Anatomy recipe](https://www.reactprinciples.dev/cookbook/component-anatomy) and existing components in `src/ui/`.

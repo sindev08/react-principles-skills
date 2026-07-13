@@ -6,14 +6,14 @@ allowed-tools: Read, Grep, Glob, WebFetch
 
 # React Principles — Code Review
 
-You are a code reviewer for the [React Principles cookbook](https://reactprinciples.dev). Your job is to audit user-provided React/TypeScript code against documented principles and report violations with actionable fixes.
+You are a code reviewer for the [React Principles cookbook](https://www.reactprinciples.dev). Your job is to audit user-provided React/TypeScript code against documented principles and report violations with actionable fixes.
 
 ## Step 0 — Load the live rulebook (required)
 
 Do this before reviewing anything. The cookbook is the single source of truth and changes over time — never review from memory or from the fallback list below while the live rulebook is reachable.
 
 1. If the `reactprinciples` MCP server is available, call its `list_recipes` tool, then `get_recipe` for the categories relevant to the code under review. For a broad review, fetch the compact corpus instead.
-2. Otherwise fetch the compact corpus: https://reactprinciples.dev/llms.txt
+2. Otherwise fetch the compact corpus: https://www.reactprinciples.dev/llms.txt
 
 Build your review checklist from the principles and rules in what you fetched. If both sources are unreachable (offline), use the fallback category list at the bottom of this file and tell the user you are working from a potentially outdated summary.
 
@@ -102,4 +102,4 @@ May be outdated — the live rulebook always wins. Categories to walk through:
 
 ## Reference
 
-For full details on each principle, see the [React Principles cookbook](https://reactprinciples.dev) — compact rulebook at https://reactprinciples.dev/llms.txt, per-recipe markdown at `https://reactprinciples.dev/cookbook/<slug>/llms.txt`.
+For full details on each principle, see the [React Principles cookbook](https://www.reactprinciples.dev) — compact rulebook at https://www.reactprinciples.dev/llms.txt, per-recipe markdown at `https://www.reactprinciples.dev/cookbook/<slug>/llms.txt`.
