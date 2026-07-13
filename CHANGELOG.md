@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Version bumps and entries are managed automatically by [release-please](https://github.com/googleapis/release-please) based on conventional commits.
 
+## [0.2.0](https://github.com/sindev08/react-principles-skills/compare/v0.1.0...v0.2.0) (2026-07-13)
+
+
+### Features
+
+* fetch recipe content live instead of embedding snapshots ([fa90920](https://github.com/sindev08/react-principles-skills/commit/fa909204994a3a0eab834c39945534ee40a49fd3))
+* fetch recipe content live instead of embedding snapshots ([675cf57](https://github.com/sindev08/react-principles-skills/commit/675cf57aa854d2e9ff6ddab8fc3dc521e0cd31bc))
+
+
+### Bug Fixes
+
+* **skills:** use canonical www host for cookbook fetch urls ([c32b240](https://github.com/sindev08/react-principles-skills/commit/c32b24023f40cee8a8ee1cc76ef88d282f4c276e))
+
 ## [0.1.0](https://github.com/sindev08/react-principles-skills/compare/v0.0.1...v0.1.0) (2026-05-14)
 
 
