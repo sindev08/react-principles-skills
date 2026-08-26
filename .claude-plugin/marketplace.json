@@ -1,0 +1,15 @@
+{
+  "name": "react-principles",
+  "owner": {
+    "name": "sindev08",
+    "url": "https://github.com/sindev08"
+  },
+  "description": "Claude Code skills and MCP server for the React Principles cookbook",
+  "plugins": [
+    {
+      "name": "reactprinciples",
+      "source": ".",
+      "description": "React Principles cookbook skills — scaffold components, hooks, stores, queries, forms, and review code against the cookbook patterns. Includes MCP server for live recipe access."
+    }
+  ]
+}

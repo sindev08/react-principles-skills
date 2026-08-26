@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "reactprinciples": {
+      "type": "sse",
+      "url": "https://www.reactprinciples.dev/api/mcp",
+      "description": "React Principles cookbook — recipes, components, and search. Skills use this to fetch live recipe content."
+    }
+  }
+}

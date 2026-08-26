@@ -1,0 +1,5 @@
+{
+  "name": "reactprinciples",
+  "description": "React Principles cookbook skills — scaffold components, hooks, stores, queries, forms, and review code. Includes MCP server for live recipe access.",
+  "version": "0.2.0"
+}
