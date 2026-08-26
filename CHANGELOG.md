@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Version bumps and entries are managed automatically by [release-please](https://github.com/googleapis/release-please) based on conventional commits.
 
+## [0.3.0](https://github.com/sindev08/react-principles-skills/compare/v0.2.0...v0.3.0) (2026-08-26)
+
+
+### Features
+
+* **plugin:** add marketplace + plugin manifests and .mcp.json for auto-registration ([a88bc22](https://github.com/sindev08/react-principles-skills/commit/a88bc22731b810b43458a3fd7949517006ec854f))
+* **skills:** add when_to_use + paths, slim descriptions for reliable auto-trigger ([7e92303](https://github.com/sindev08/react-principles-skills/commit/7e923035c1d852dc064b3e83bde250d230dbf3d3))
+
 ## [0.2.0](https://github.com/sindev08/react-principles-skills/compare/v0.1.0...v0.2.0) (2026-07-13)
 
 
