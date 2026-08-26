@@ -35,8 +35,29 @@ Sub-instructions, examples, code patterns, etc.
 | Field | Required | Notes |
 |---|---|---|
 | `name` | Yes | Lowercase + hyphens. Max 64 chars. Must match the folder name. |
-| `description` | Yes | Tells the AI when to invoke. Should mention triggers and intent. |
+| `description` | Yes | What the skill does. Keep short — this is the primary trigger signal. |
+| `when_to_use` | No | Trigger phrases and examples. Appended to `description` in the skill listing. Combined char cap: 1,536. |
 | `allowed-tools` | No | Restricts which tools the skill can use. Omit for unrestricted. |
+| `disable-model-invocation` | No | `true` = skill only invocable via `/skill-name`, never auto-triggered by the model. |
+| `paths` | No | Glob patterns. Skill auto-activates only when matching files are in scope. Do NOT use on scaffolding skills (they create files that don't exist yet). |
+
+### Listing character budget
+
+The skill listing (all `description` + `when_to_use` combined) has a per-entry cap of **1,536 characters**. Exceeding it causes truncation, which degrades auto-trigger. CI enforces this.
+
+### Source path references
+
+When a skill references `src/...` paths from the main `react-principles` repo, those paths must actually exist. CI checks this with `--check-paths`. Use template placeholders (`src/features/<feature>/hooks/`) for paths that vary per project.
+
+### Source path convention for verifiable references
+
+Use fenced markers in SKILL.md body for paths CI should check:
+
+```
+<!-- verify-path: src/ui/Button.tsx -->
+```
+
+CI extracts these and verifies they exist in the main repo. This keeps drift-caught paths explicit.
 
 ### Naming convention
 
