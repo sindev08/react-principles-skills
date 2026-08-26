@@ -1,6 +1,7 @@
 ---
 name: reactprinciples-store
-description: Scaffold a Zustand store following React Principles client-state recipe. Invoke when the user says "create a Zustand store", "scaffold a state store", or asks about React Principles state management. Generates a typed store with colocated actions, selector pattern, useShallow guidance, reset action, and 'use client' directive. Includes a colocated test file. Use for UI/client state only — server state belongs in React Query.
+description: Scaffold a Zustand store following React Principles client-state recipe — typed store, selectors, useShallow, reset action, colocated test.
+when_to_use: "Use when creating, building, or scaffolding a Zustand store — e.g. 'bikin store zustand', 'create a Zustand store', 'scaffold a state store', 'butuh store buat filter', 'add theme store'. Do NOT use for debugging, explaining, or reviewing existing stores."
 allowed-tools: Read, Write, Glob, WebFetch
 ---
 
@@ -67,6 +68,12 @@ Tell the user:
 3. Reminder: when consuming, use selectors (not full-state subscriptions) and `useShallow` for multi-value reads
 4. **DO NOT** add `'use client'` to barrel `index.ts` — only the store file itself
 
+## Adapt to the existing repo
+
+Match the conventions already in this project. Where the project's store style differs from the cookbook pattern, follow the project and note the difference once — do not force the cookbook approach.
+
+Non-negotiable (correctness, not taste): `'use client'` on the store file (not the barrel), initial state as a const, consume via selectors not full-state destructuring.
+
 ## What you should NOT do
 
 - Don't use Redux Toolkit, Jotai, or other state libraries — React Principles uses Zustand
@@ -76,7 +83,7 @@ Tell the user:
 
 ## Fallback summary (only if Step 0 fails)
 
-May be outdated — the live recipe always wins.
+⚠️ Working from offline summary — live recipe may be more current.
 
 - `'use client'` at the top of the store file (Zustand uses React internals)
 - Initial state as a `const` so `reset: () => set(initialState)` stays clean

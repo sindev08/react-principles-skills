@@ -1,6 +1,10 @@
 ---
 name: reactprinciples-review
-description: Review React/TypeScript code against the React Principles cookbook. Invoke when the user asks to "review", "audit", or "check" their React code, or asks whether code follows React Principles. Reads the target file(s), flags violations across the documented principle categories (folder structure, TypeScript, components, state, forms, services, etc.), and reports findings with severity, reasoning, and concrete fix suggestions. Does not modify code.
+description: Review React/TypeScript code against the React Principles cookbook — flags violations with severity, reasoning, and concrete fixes. Read-only.
+when_to_use: "Use when reviewing, auditing, debugging, or checking React code — e.g. 'cek kode ini', 'kenapa store gue re-render terus?', 'review PR ini', 'apa bedanya zustand sama redux', 'does this follow React Principles?', 'what's wrong with this file?'. Do NOT use when creating or scaffolding new files."
+paths:
+  - "src/**/*.ts"
+  - "src/**/*.tsx"
 allowed-tools: Read, Grep, Glob, WebFetch
 ---
 
@@ -82,9 +86,13 @@ End with a short summary: total counts per severity, and the single most importa
 - Don't review code that's outside React/TypeScript scope (e.g., backend Go, SQL migrations) — politely decline
 - Don't repeat the entire file back to the user — only quote the offending parts
 
+## Adapt to the existing repo
+
+Apply the principles from the cookbook, but respect the project's existing conventions. If the project has a deliberate deviation from the cookbook, note it once as "different from cookbook" but do not flag it as a violation.
+
 ## Fallback category list (only if Step 0 fails)
 
-May be outdated — the live rulebook always wins. Categories to walk through:
+⚠️ Working from offline summary — live rulebook may be more current. Categories to walk through:
 
 1. Folder structure (feature-sliced; no cross-feature imports; `@/` alias)
 2. TypeScript (no `any`, no `!`, `import type`, optional chaining)

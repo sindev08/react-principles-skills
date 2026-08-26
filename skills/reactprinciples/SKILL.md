@@ -1,6 +1,7 @@
 ---
 name: reactprinciples
-description: Master entry point for React Principles. Invoke when the user mentions "React Principles", asks for help with the cookbook patterns without specifying a sub-skill, or wants an overview of available React Principles capabilities. Routes intent to the right sub-skill (review, folder-structure, component, hook, store, query, form, recipe, audit-recipe) and either delegates to that sub-skill or executes the equivalent task. When intent is ambiguous, lists options and asks the user to clarify.
+description: Master entry point for React Principles — routes intent to the right sub-skill. Use /reactprinciples to invoke manually.
+disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 ---
 

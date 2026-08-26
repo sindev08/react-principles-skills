@@ -1,6 +1,7 @@
 ---
 name: reactprinciples-form
-description: Scaffold a React Hook Form + Zod form following React Principles form-validation recipe. Invoke when the user says "create a form", "scaffold a validation form", or mentions React Hook Form and Zod. Generates a Zod schema (or reuses an existing one with .omit/.pick/.extend), a typed form component with zodResolver, field error display, and integration with a React Query mutation. Handles both create and edit form variants.
+description: Scaffold a React Hook Form + Zod form following React Principles form-validation recipe — Zod schema, zodResolver, error display, mutation integration.
+when_to_use: "Use when creating, building, or scaffolding a form — e.g. 'bikin form login', 'create a form with validation', 'scaffold a validation form', 'add form buat register', 'need a create/edit form'. Do NOT use for debugging, explaining, or reviewing existing forms."
 allowed-tools: Read, Write, Glob, WebFetch
 ---
 
@@ -62,6 +63,12 @@ Tell the user:
 3. Whether the mutation hook (`useCreate<Resource>`, `useUpdate<Resource>`) exists — if not, suggest using `reactprinciples-query` skill
 4. Import path: `import { <Resource>Form } from "@/features/<feature>/components/<Resource>Form"`
 
+## Adapt to the existing repo
+
+Match the conventions already in this project. Where the project's form style differs from the cookbook pattern, follow the project and note the difference once — do not force the cookbook approach.
+
+Non-negotiable (correctness, not taste): Zod schema is source of truth, error messages live in schema not JSX, `zodResolver` from `@hookform/resolvers/zod`.
+
 ## What you should NOT do
 
 - Don't put validation logic in `onSubmit` — Zod handles it
@@ -72,7 +79,7 @@ Tell the user:
 
 ## Fallback summary (only if Step 0 fails)
 
-May be outdated — the live recipe always wins.
+⚠️ Working from offline summary — live recipe may be more current.
 
 - The Zod schema is the single source of truth; error messages live in the schema, never in JSX
 - Use `zodResolver` from `@hookform/resolvers/zod`; wrap mutation calls in `handleSubmit`

@@ -1,6 +1,7 @@
 ---
 name: reactprinciples-query
-description: Scaffold a TanStack Query (React Query) hook following React Principles server-state recipe. Invoke when the user says "create a React Query hook", "fetch data with useQuery", or asks for server state management. Generates the query hook with staleTime, placeholderData, enabled flag where appropriate, plus pairs with a service method and the queryKeys factory. Use for server data only — client state belongs in Zustand.
+description: Scaffold a TanStack Query hook following React Principles server-state recipe — staleTime, placeholderData, enabled, queryKeys factory.
+when_to_use: "Use when creating, building, or scaffolding a data fetching hook — e.g. 'bikin fetch data', 'create a React Query hook', 'gue butuh fetch data user, cache 5 menit', 'scaffold useQuery', 'add pagination hook'. Do NOT use for debugging, explaining, or reviewing existing queries."
 allowed-tools: Read, Write, Glob, WebFetch
 ---
 
@@ -68,6 +69,12 @@ Tell the user:
 4. If the service method doesn't exist yet, instruct them to add it to the appropriate service file
 5. Suggest pairing with `HydrationBoundary` + `dehydrate` for SSR prefetch in Next.js page components
 
+## Adapt to the existing repo
+
+Match the conventions already in this project. Where the project's query style differs from the cookbook pattern, follow the project and note the difference once — do not force the cookbook approach.
+
+Non-negotiable (correctness, not taste): server state goes in React Query, never in Zustand; staleTime must be explicit; hooks call typed service methods, never `fetch` directly.
+
 ## What you should NOT do
 
 - Don't use `fetch()` or `axios` directly in the hook — call a service method that uses `createApiClient`
@@ -77,7 +84,7 @@ Tell the user:
 
 ## Fallback summary (only if Step 0 fails)
 
-May be outdated — the live recipe always wins.
+⚠️ Working from offline summary — live recipe may be more current.
 
 - Always set `staleTime` explicitly (minutes, not zero); `placeholderData: (prev) => prev` for paginated lists
 - `enabled` flag for dependent queries (`enabled: !!id`, `enabled: query.length > 0` for search)

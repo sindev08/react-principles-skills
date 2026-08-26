@@ -1,6 +1,7 @@
 ---
 name: reactprinciples-recipe
-description: Draft a new React Principles cookbook recipe in the standard structure. Invoke when the user (as a cookbook maintainer) says "draft a new recipe", "create a recipe for X", or "add a new cookbook topic". Reads existing recipes (server-state, client-state, form-validation, data-tables, api-integration) as structural reference, prompts for topic and key principles, then generates a TypeScript file matching the RecipeDetail type. This is an internal maintainer skill — not promoted to end users.
+description: Draft a new React Principles cookbook recipe in the standard structure. Internal maintainer skill.
+disable-model-invocation: true
 allowed-tools: Read, Write, Glob
 ---
 

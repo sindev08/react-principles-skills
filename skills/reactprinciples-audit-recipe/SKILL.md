@@ -1,6 +1,7 @@
 ---
 name: reactprinciples-audit-recipe
-description: Audit an existing React Principles cookbook recipe for accuracy against the actual codebase. Invoke when the user (as a cookbook maintainer) says "audit recipe X", "check recipe accuracy", or "verify recipe is up to date". Reads the recipe file, checks every import path and pattern claim against the real codebase, flags discrepancies, and reports findings with fix suggestions. This is an internal maintainer skill — not promoted to end users.
+description: Audit an existing cookbook recipe for accuracy against the real codebase. Internal maintainer skill.
+disable-model-invocation: true
 allowed-tools: Read, Grep, Glob
 ---
 

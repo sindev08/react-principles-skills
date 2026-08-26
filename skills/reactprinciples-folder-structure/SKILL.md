@@ -1,6 +1,7 @@
 ---
 name: reactprinciples-folder-structure
-description: Scaffold a feature-sliced folder structure for a new feature in a React project following the React Principles cookbook. Invoke when the user says "create a new feature", "scaffold feature folder", or asks about React Principles folder structure. Creates the directory layout (components, hooks, stores, data) with barrel index.ts files at appropriate levels. Does not generate component bodies — only the structure.
+description: Scaffold a feature-sliced folder structure for a new feature — components, hooks, stores, data with barrel index.ts files.
+when_to_use: "Use when creating, scaffolding, or setting up a new feature folder — e.g. 'bikin folder fitur baru', 'scaffold feature folder', 'create a new feature called users', 'setup folder checkout', 'butuh struktur folder'. Do NOT use for debugging, explaining, or reviewing existing folder structures."
 allowed-tools: Read, Write, Bash, Glob, WebFetch
 ---
 
@@ -57,6 +58,12 @@ Tell the user:
 2. Where to add their first component / hook / store
 3. The import path other features should use: `import { ... } from '@/features/<feature>'`
 
+## Adapt to the existing repo
+
+Match the conventions already in this project. Where the project's folder structure differs from the cookbook pattern, follow the project and note the difference once — do not force the cookbook approach.
+
+Non-negotiable (correctness, not taste): feature folders go in `src/features/`, shared code in `src/shared/`, UI primitives in `src/ui/`.
+
 ## What you should NOT do
 
 - Don't generate actual components or hooks — that's a separate skill (`reactprinciples-component`, `reactprinciples-hook`)
@@ -65,7 +72,7 @@ Tell the user:
 
 ## Fallback summary (only if Step 0 fails)
 
-May be outdated — the live recipe always wins.
+⚠️ Working from offline summary — live recipe may be more current.
 
 - Features live in `src/features/<feature>/` with optional `components/`, `hooks/`, `stores/`, `data/` subfolders, each with a barrel `index.ts`
 - The root barrel re-exports the public API only — internal types, utilities, and stores stay private

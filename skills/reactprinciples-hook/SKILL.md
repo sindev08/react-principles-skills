@@ -1,6 +1,7 @@
 ---
 name: reactprinciples-hook
-description: Scaffold a custom React hook following React Principles custom-hooks recipe. Invoke when the user says "create a custom hook", "scaffold a hook", or asks for a hook to encapsulate logic. Generates the hook file with proper naming (use prefix), TypeScript types, a stable return shape, and a colocated test file. Places the hook in src/shared/hooks/ for cross-feature use or src/features/<x>/hooks/ for feature-specific.
+description: Scaffold a custom React hook following React Principles custom-hooks recipe — use prefix, typed return shape, colocated test.
+when_to_use: "Use when creating, building, or scaffolding a custom React hook — e.g. 'bikin custom hook', 'create a hook for debounce', 'scaffold a hook', 'extract this into a hook', 'butuh useMediaQuery'. Do NOT use for debugging, explaining, or reviewing existing hooks."
 allowed-tools: Read, Write, Glob, WebFetch
 ---
 
@@ -63,6 +64,12 @@ Tell the user:
 3. Whether to add the hook to a barrel `index.ts`
 4. A reminder to run the test: `pnpm test use<Name>`
 
+## Adapt to the existing repo
+
+Match the conventions already in this project. Where the project's hook style differs from the cookbook pattern, follow the project and note the difference once — do not force the cookbook approach.
+
+Non-negotiable (correctness, not taste): `use` prefix on the hook name, stable return shape, colocated test file.
+
 ## What you should NOT do
 
 - Don't generate hooks that wrap a single React API one-to-one without adding value (e.g., a hook that just calls `useState`)
@@ -71,7 +78,7 @@ Tell the user:
 
 ## Fallback summary (only if Step 0 fails)
 
-May be outdated — the live recipe always wins.
+⚠️ Working from offline summary — live recipe may be more current.
 
 - Name starts with `use`, camelCase; only called from components or other hooks
 - Stable return shape: single value, `[value, setter] as const` tuple, or a named object for 2+ values — never more than 4

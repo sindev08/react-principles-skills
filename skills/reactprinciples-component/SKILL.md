@@ -1,6 +1,7 @@
 ---
 name: reactprinciples-component
-description: Scaffold a React UI component following React Principles anatomy patterns. Invoke when the user says "create a component", "make a Button-style component", or asks for a new UI primitive. Generates a self-contained component file with props extending native HTML element attributes, variants/sizes as Record constants, cn() for class merging, and a colocated Storybook story file. Matches the patterns in src/ui/.
+description: Scaffold a React UI component following React Principles anatomy patterns — props extending HTMLAttributes, variants as Record constants, cn() for class merging.
+when_to_use: "Use when creating, building, or scaffolding a React component — e.g. 'bikin component', 'create a Button-style component', 'add a new UI primitive', 'buat Card component', 'I need a Modal'. Do NOT use for debugging, explaining, or reviewing existing components."
 allowed-tools: Read, Write, Glob, WebFetch
 ---
 
@@ -59,6 +60,12 @@ Tell the user:
 3. Whether they need to add the component to a barrel `index.ts`
 4. A reminder to add the docs page at `src/app/docs/<kebab-name>/page.tsx` if it's a shared UI primitive
 
+## Adapt to the existing repo
+
+Match the conventions already in this project. Where the project's component style differs from the cookbook pattern, follow the project and note the difference once — do not force the cookbook approach.
+
+Non-negotiable (correctness, not taste): props extend the HTMLAttributes of the wrapped element; variants use `Record<>`, not `cva`; all dynamic classes go through `cn()`.
+
 ## What you should NOT do
 
 - Don't use `cva` or `class-variance-authority` — React Principles uses `Record<>` constants instead
@@ -68,7 +75,7 @@ Tell the user:
 
 ## Fallback summary (only if Step 0 fails)
 
-May be outdated — the live recipe always wins.
+⚠️ Working from offline summary — live recipe may be more current.
 
 - Props extend the native element's HTMLAttributes (e.g., `interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>`)
 - Variants and sizes are `Record<VariantType, string>` constants, not cva
